@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumbukumbu ya Mungu - Makala ya Kiroho</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBlue: '#0f172a',
+                        softWhite: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom styles for transitions and progress bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+        .progress-bar {
+            height: 4px;
+            background: #3b82f6;
+            width: 0%;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        .font-sans-custom { font-family: 'Inter', sans-serif; }
+        .font-mono-custom { font-family: 'Fira Code', monospace; }
+        
+        body { transition: background-color 0.3s, color 0.3s; }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-softWhite text-slate-800 dark:bg-darkBlue dark:text-slate-200 font-sans-custom" id="articleBody">
+
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <nav class="sticky top-0 z-50 w-full glass dark:bg-slate-900/50 py-3 px-4 shadow-sm">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <select onchange="changeFont(this.value)" class="bg-transparent border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-sm focus:outline-none">
+                    <option value="font-sans-custom">Sans Serif</option>
+                    <option value="font-serif-custom">Serif</option>
+                    <option value="font-mono-custom">Monospace</option>
+                </select>
+                
+                <div class="flex items-center border border-slate-300 dark:border-slate-600 rounded">
+                    <button onclick="changeSize(-2)" class="px-3 py-1 hover:bg-slate-200 dark:hover:bg-slate-700 transition border-r border-slate-300 dark:border-slate-600">A-</button>
+                    <button onclick="changeSize(2)" class="px-3 py-1 hover:bg-slate-200 dark:hover:bg-slate-700 transition">A+</button>
+                </div>
+            </div>
+
+            <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Badili Modu">
+                <svg id="sunIcon" class="hidden w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+                <svg id="moonIcon" class="w-6 h-6 text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-4 pt-16 pb-8 text-center">
+        <div class="mb-6 overflow-hidden rounded-2xl shadow-xl">
+            <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200" alt="Mwangaza wa mshumaa" class="w-full h-64 md:h-96 object-cover hover:scale-105 transition duration-500">
+        </div>
+        <h1 id="mainTitle" class="text-4xl md:text-6xl font-bold mb-4 font-serif-custom leading-tight">
+            Mungu si Dhalimu: Siri ya Kumbukumbu ya Kiungu
+        </h1>
+        <div class="flex items-center justify-center space-x-4 text-sm text-slate-500 dark:text-slate-400">
+            <span class="font-semibold text-blue-500">Pastor Aloyce</span>
+            <span>•</span>
+            <span>Aprili 18, 2026</span>
+            <span>•</span>
+            <span id="readTime">2 min kusoma</span>
+        </div>
+    </header>
+
+    <article class="max-w-3xl mx-auto px-4 pb-20">
+        <div id="contentArea" class="text-lg md:text-xl leading-relaxed space-y-8">
+            
+            <p class="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left">
+                Katika ulimwengu ambao watu husahau fadhila haraka, ni rahisi kudhani kuwa hata Mungu hufanya vivyo hivyo. Lakini andiko la <strong>Waebrania 6:10</strong> linatufungulia mlango wa kuelewa tabia ya Mungu kama 'Mwenye Haki'.
+            </p>
+
+            <blockquote class="border-l-4 border-blue-500 pl-6 py-2 italic bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-200 rounded-r-lg">
+                "Maana Mungu si dhalimu hata aisahau kazi yenu, na upendo ule mliouonyesha kwa jina lake, kwa kuwa mliwahudumia watakatifu na hata sasa mngali mkiwahudumia."
+            </blockquote>
+
+            <h2 class="text-2xl md:text-3xl font-bold mt-12 mb-4 font-serif-custom">Kwanini Huduma Yako Ina Thamani?</h2>
+            <p>
+                Utangulizi huu unachambua funguo kuu zinazotuthibitishia kuwa huduma yetu kwa watakatifu si kazi ya bure. Tunapojifunza siri hizi, tunapata nguvu mpya ya kuendelea kutenda mema.
+            </p>
+
+            <ul class="list-none space-y-4 my-8">
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">✦</span>
+                    <span><strong>Kumbukumbu ya Mungu haina ukomo:</strong> Yeye hahitaji faili wala kompyuta, kila tone la jasho limeandikwa.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">✦</span>
+                    <span><strong>Thawabu yake haina upendeleo:</strong> Mungu haulizi cheo chako, anaangalia uaminifu wako.</span>
+                </li>
+            </ul>
+
+            <h3 class="text-xl md:text-2xl font-semibold mt-8 mb-4">Hitimisho la Utangulizi</h3>
+            <p>
+                Usikate tamaa unapohisi wanadamu hawajathamini ulichofanya. Unapofunga ukurasa huu, ondoka na uhakika huu: Macho ya Mungu yameona, na mikono yake imebeba thawabu yako.
+            </p>
+        </div>
+    </article>
+
+    <footer class="bg-slate-100 dark:bg-slate-900 py-12 px-4 text-center border-t border-slate-200 dark:border-slate-800">
+        <p class="text-sm text-slate-500 mb-2">Disciples Community Church Kisesa Mwanza</p>
+        <p class="font-serif-custom">&copy; 2026   .   Pastor Aloyce</p>
+    </footer>
+
+    <script>
+        // Reading Progress Logic
+        window.onscroll = function() { updateProgressBar() };
+        function updateProgressBar() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        }
+
+        // Dark Mode Logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const sun = document.getElementById('sunIcon');
+            const moon = document.getElementById('moonIcon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                sun.classList.add('hidden');
+                moon.classList.remove('hidden');
+            } else {
+                html.classList.add('dark');
+                sun.classList.remove('hidden');
+                moon.classList.add('hidden');
+            }
+        }
+
+        // Font Family Logic
+        function changeFont(fontClass) {
+            const body = document.getElementById('articleBody');
+            body.classList.remove('font-sans-custom', 'font-serif-custom', 'font-mono-custom');
+            body.classList.add(fontClass);
+        }
+
+        // Font Size Logic
+        let fontSize = 20; // default size
+        function changeSize(step) {
+            fontSize += step;
+            if (fontSize < 14) fontSize = 14;
+            if (fontSize > 32) fontSize = 32;
+            document.getElementById('contentArea').style.fontSize = fontSize + 'px';
+        }
+    </script>
+</body>
+</html>
